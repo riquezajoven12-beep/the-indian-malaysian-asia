@@ -1,54 +1,31 @@
 import { NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
 
 export async function POST(request: Request) {
   try {
     const { email } = await request.json();
 
-    if (!email || !email.includes('@')) {
-      return NextResponse.json(
-        { error: 'Invalid email address' },
-        { status: 400 }
-      );
+    if (!email) {
+      return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
-    // Check if already subscribed
-    const { data: existing } = await supabaseAdmin
-      .from('subscribers')
-      .select('id, is_active')
-      .eq('email', email)
-      .single();
-
-    if (existing) {
-      if (existing.is_active) {
-        return NextResponse.json(
-          { message: 'Already subscribed' },
-          { status: 200 }
-        );
-      } else {
-        // Reactivate subscription
-        await supabaseAdmin
-          .from('subscribers')
-          .update({ is_active: true, unsubscribed_at: null })
-          .eq('id', existing.id);
-        
-        return NextResponse.json({ message: 'Subscription reactivated' });
-      }
-    }
-
-    // Create new subscription
     const { error } = await supabaseAdmin
       .from('subscribers')
-      .insert([{ email }]);
+      .upsert({ email, is_active: true }, { onConflict: 'email' });
 
-    if (error) throw error;
+    if (error) {
+      console.error('Subscription error:', error);
+      return NextResponse.json({ error: 'Failed to subscribe' }, { status: 500 });
+    }
 
-    return NextResponse.json({ message: 'Successfully subscribed' });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Subscription error:', error);
-    return NextResponse.json(
-      { error: 'Failed to subscribe' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
