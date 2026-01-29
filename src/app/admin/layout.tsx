@@ -12,7 +12,7 @@ export default async function AdminLayout({
   const { data: { session } } = await supabase.auth.getSession();
   
   if (!session) {
-    redirect('/login?redirect=/admin');
+    redirect('/');
   }
 
   const { data: profile } = await supabase
@@ -21,13 +21,15 @@ export default async function AdminLayout({
     .eq('id', session.user.id)
     .single();
 
-  if (!profile || !['admin', 'editor', 'contributor'].includes(profile.role)) {
+  const userRole = (profile as { role: string } | null)?.role || 'member';
+
+  if (!['admin', 'editor', 'contributor'].includes(userRole)) {
     redirect('/');
   }
 
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <AdminSidebar userRole={profile.role} />
+      <AdminSidebar userRole={userRole} />
       <main className="flex-1 ml-64 p-8">
         {children}
       </main>
