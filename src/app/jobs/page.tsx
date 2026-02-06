@@ -29,12 +29,19 @@ export default function JobsPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#FFFCF7' }}>
-      {/* Header */}
+      {/* Header with Navigation */}
       <header style={{ background: '#1A1A1A', padding: '20px 40px' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link href="/" style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem', fontWeight: 800, color: 'white', textDecoration: 'none' }}>
             The Indian <span style={{ color: '#FF6B00' }}>Malaysian</span>
           </Link>
+          <nav style={{ display: 'flex', gap: '25px' }}>
+            <Link href="/news" style={{ color: 'white', textDecoration: 'none' }}>News</Link>
+            <Link href="/events" style={{ color: 'white', textDecoration: 'none' }}>Events</Link>
+            <Link href="/education" style={{ color: 'white', textDecoration: 'none' }}>Education</Link>
+            <Link href="/community" style={{ color: 'white', textDecoration: 'none' }}>Community</Link>
+            <Link href="/jobs" style={{ color: '#FF6B00', textDecoration: 'none' }}>Jobs</Link>
+          </nav>
         </div>
       </header>
 
