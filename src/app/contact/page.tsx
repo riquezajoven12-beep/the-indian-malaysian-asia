@@ -22,18 +22,26 @@ export default function ContactPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#FFFCF7' }}>
-      {/* Header */}
+      {/* Header with Navigation */}
       <header style={{ background: '#1A1A1A', padding: '20px 40px' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link href="/" style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem', fontWeight: 800, color: 'white', textDecoration: 'none' }}>
             The Indian <span style={{ color: '#FF6B00' }}>Malaysian</span>
           </Link>
+          <nav style={{ display: 'flex', gap: '25px' }}>
+            <Link href="/news" style={{ color: 'white', textDecoration: 'none' }}>News</Link>
+            <Link href="/events" style={{ color: 'white', textDecoration: 'none' }}>Events</Link>
+            <Link href="/education" style={{ color: 'white', textDecoration: 'none' }}>Education</Link>
+            <Link href="/community" style={{ color: 'white', textDecoration: 'none' }}>Community</Link>
+            <Link href="/about" style={{ color: 'white', textDecoration: 'none' }}>About</Link>
+            <Link href="/contact" style={{ color: '#FF6B00', textDecoration: 'none' }}>Contact</Link>
+          </nav>
         </div>
       </header>
 
       {/* Hero */}
       <div style={{ background: 'linear-gradient(135deg, #0D5C63 0%, #1B4332 100%)', padding: '60px 40px', textAlign: 'center' }}>
-        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: '3rem', color: 'white', marginBottom: '10px' }}>Contact Us</h1>
+        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: '3rem', color: 'white', marginBottom: '10px' }}>✉️ Contact Us</h1>
         <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.1rem' }}>We'd love to hear from you</p>
       </div>
 
@@ -44,7 +52,7 @@ export default function ContactPage() {
             <div style={{ fontSize: '4rem', marginBottom: '20px' }}>✅</div>
             <h2 style={{ fontFamily: "'Playfair Display', serif", marginBottom: '15px' }}>Message Sent!</h2>
             <p style={{ color: '#666', marginBottom: '25px' }}>Thank you for reaching out. We'll get back to you soon.</p>
-            <button onClick={() => setSent(false)} style={{ background: '#FF6B00', color: 'white', border: 'none', padding: '12px 30px', borderRadius: '8px', cursor: 'pointer' }}>
+            <button onClick={() => setSent(false)} style={{ background: '#FF6B00', color: 'white', border: 'none', padding: '12px 30px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600 }}>
               Send Another Message
             </button>
           </div>
@@ -57,7 +65,7 @@ export default function ContactPage() {
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 required
-                style={{ width: '100%', padding: '12px', border: '2px solid #ddd', borderRadius: '8px' }}
+                style={{ width: '100%', padding: '12px', border: '2px solid #ddd', borderRadius: '8px', fontSize: '1rem' }}
               />
             </div>
             <div style={{ marginBottom: '20px' }}>
@@ -67,7 +75,7 @@ export default function ContactPage() {
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 required
-                style={{ width: '100%', padding: '12px', border: '2px solid #ddd', borderRadius: '8px' }}
+                style={{ width: '100%', padding: '12px', border: '2px solid #ddd', borderRadius: '8px', fontSize: '1rem' }}
               />
             </div>
             <div style={{ marginBottom: '20px' }}>
@@ -77,7 +85,7 @@ export default function ContactPage() {
                 value={form.subject}
                 onChange={(e) => setForm({ ...form, subject: e.target.value })}
                 required
-                style={{ width: '100%', padding: '12px', border: '2px solid #ddd', borderRadius: '8px' }}
+                style={{ width: '100%', padding: '12px', border: '2px solid #ddd', borderRadius: '8px', fontSize: '1rem' }}
               />
             </div>
             <div style={{ marginBottom: '25px' }}>
@@ -87,7 +95,7 @@ export default function ContactPage() {
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 required
                 rows={6}
-                style={{ width: '100%', padding: '12px', border: '2px solid #ddd', borderRadius: '8px', resize: 'vertical' }}
+                style={{ width: '100%', padding: '12px', border: '2px solid #ddd', borderRadius: '8px', resize: 'vertical', fontSize: '1rem' }}
               />
             </div>
             <button
@@ -101,6 +109,7 @@ export default function ContactPage() {
                 border: 'none',
                 borderRadius: '8px',
                 fontWeight: 600,
+                fontSize: '1rem',
                 cursor: sending ? 'not-allowed' : 'pointer',
               }}
             >
