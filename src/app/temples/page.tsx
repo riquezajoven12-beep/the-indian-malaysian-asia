@@ -20,7 +20,7 @@ export default function TemplesPage() {
   const [filterState, setFilterState] = useState('all');
 
   const types = ['all', 'hindu_temple', 'sikh_gurdwara', 'church'];
-  const states = ['all', 'selangor', 'kuala_lumpur', 'penang', 'johor', 'perak', 'negeri_sembilan'];
+  const states = ['all', 'selangor', 'kuala_lumpur', 'penang', 'johor', 'perak', 'negeri_sembilan', 'kedah', 'melaka', 'pahang', 'terengganu', 'sabah', 'sarawak'];
 
   useEffect(() => {
     fetch('/api/temples')
@@ -40,12 +40,19 @@ export default function TemplesPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#FFFCF7' }}>
-      {/* Header */}
+      {/* Header with Navigation */}
       <header style={{ background: '#1A1A1A', padding: '20px 40px' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link href="/" style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem', fontWeight: 800, color: 'white', textDecoration: 'none' }}>
             The Indian <span style={{ color: '#FF6B00' }}>Malaysian</span>
           </Link>
+          <nav style={{ display: 'flex', gap: '25px' }}>
+            <Link href="/news" style={{ color: 'white', textDecoration: 'none' }}>News</Link>
+            <Link href="/events" style={{ color: 'white', textDecoration: 'none' }}>Events</Link>
+            <Link href="/temples" style={{ color: '#FF6B00', textDecoration: 'none' }}>Temples</Link>
+            <Link href="/community" style={{ color: 'white', textDecoration: 'none' }}>Community</Link>
+            <Link href="/about" style={{ color: 'white', textDecoration: 'none' }}>About</Link>
+          </nav>
         </div>
       </header>
 
@@ -61,7 +68,7 @@ export default function TemplesPage() {
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            style={{ padding: '12px 20px', border: '2px solid #ddd', borderRadius: '8px', background: 'white', minWidth: '200px' }}
+            style={{ padding: '12px 20px', border: '2px solid #ddd', borderRadius: '8px', background: 'white', minWidth: '200px', cursor: 'pointer' }}
           >
             <option value="all">All Types</option>
             <option value="hindu_temple">Hindu Temples</option>
@@ -71,7 +78,7 @@ export default function TemplesPage() {
           <select
             value={filterState}
             onChange={(e) => setFilterState(e.target.value)}
-            style={{ padding: '12px 20px', border: '2px solid #ddd', borderRadius: '8px', background: 'white', minWidth: '200px' }}
+            style={{ padding: '12px 20px', border: '2px solid #ddd', borderRadius: '8px', background: 'white', minWidth: '200px', cursor: 'pointer' }}
           >
             <option value="all">All States</option>
             {states.slice(1).map(s => (
@@ -83,26 +90,3 @@ export default function TemplesPage() {
         {/* Results */}
         {loading ? (
           <p style={{ textAlign: 'center', padding: '60px', color: '#666' }}>Loading temples...</p>
-        ) : filteredTemples.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '60px' }}>
-            <p style={{ fontSize: '3rem', marginBottom: '15px' }}>🛕</p>
-            <p style={{ color: '#666' }}>No temples found. Try adjusting your filters.</p>
-          </div>
-        ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '25px' }}>
-            {filteredTemples.map((temple) => (
-              <div key={temple.id} style={{ background: 'white', padding: '25px', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.08)' }}>
-                <div style={{ fontSize: '2rem', marginBottom: '10px' }}>
-                  {temple.type === 'hindu_temple' ? '🛕' : temple.type === 'sikh_gurdwara' ? '🙏' : '⛪'}
-                </div>
-                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.2rem', color: '#1A1A1A', marginBottom: '10px' }}>{temple.name}</h3>
-                <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '5px' }}>{temple.address}</p>
-                <p style={{ color: '#888', fontSize: '0.85rem' }}>{temple.city}, {temple.state?.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</p>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
