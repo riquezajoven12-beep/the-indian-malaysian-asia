@@ -5,17 +5,24 @@ export default function EducationPage() {
     { title: 'Tamil Schools', desc: 'Directory of 523 Tamil schools across Malaysia', href: '/education/schools', icon: '🏫', color: '#8B1538' },
     { title: 'Scholarships', desc: 'Financial aid and scholarship opportunities for students', href: '/education/scholarships', icon: '🎓', color: '#1B4332' },
     { title: 'Online Courses', desc: 'Learn Tamil language, culture, and heritage online', href: '/education/courses', icon: '💻', color: '#0D5C63' },
-    { title: 'Career Resources', desc: 'Job search tips, resume help, and career guidance', href: '/education/careers', icon: '📈', color: '#D4AF37' },
+    { title: 'Career Resources', desc: 'Job search tips, resume help, and career guidance', href: '/jobs', icon: '📈', color: '#D4AF37' },
   ];
 
   return (
     <div style={{ minHeight: '100vh', background: '#FFFCF7' }}>
-      {/* Header */}
+      {/* Header with Navigation */}
       <header style={{ background: '#1A1A1A', padding: '20px 40px' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link href="/" style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem', fontWeight: 800, color: 'white', textDecoration: 'none' }}>
             The Indian <span style={{ color: '#FF6B00' }}>Malaysian</span>
           </Link>
+          <nav style={{ display: 'flex', gap: '25px' }}>
+            <Link href="/news" style={{ color: 'white', textDecoration: 'none' }}>News</Link>
+            <Link href="/events" style={{ color: 'white', textDecoration: 'none' }}>Events</Link>
+            <Link href="/education" style={{ color: '#FF6B00', textDecoration: 'none' }}>Education</Link>
+            <Link href="/community" style={{ color: 'white', textDecoration: 'none' }}>Community</Link>
+            <Link href="/about" style={{ color: 'white', textDecoration: 'none' }}>About</Link>
+          </nav>
         </div>
       </header>
 
