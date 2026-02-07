@@ -19,7 +19,6 @@ export default function TemplesPage() {
   const [filterType, setFilterType] = useState('all');
   const [filterState, setFilterState] = useState('all');
 
-  const types = ['all', 'hindu_temple', 'sikh_gurdwara', 'church'];
   const states = ['all', 'selangor', 'kuala_lumpur', 'penang', 'johor', 'perak', 'negeri_sembilan', 'kedah', 'melaka', 'pahang', 'terengganu', 'sabah', 'sarawak'];
 
   useEffect(() => {
@@ -32,7 +31,7 @@ export default function TemplesPage() {
       .catch(() => setLoading(false));
   }, []);
 
-  const filteredTemples = temples.filter(t => {
+  const filteredTemples = temples.filter((t) => {
     if (filterType !== 'all' && t.type !== filterType) return false;
     if (filterState !== 'all' && t.state !== filterState) return false;
     return true;
@@ -81,8 +80,8 @@ export default function TemplesPage() {
             style={{ padding: '12px 20px', border: '2px solid #ddd', borderRadius: '8px', background: 'white', minWidth: '200px', cursor: 'pointer' }}
           >
             <option value="all">All States</option>
-            {states.slice(1).map(s => (
-              <option key={s} value={s}>{s.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</option>
+            {states.slice(1).map((s) => (
+              <option key={s} value={s}>{s.replace('_', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}</option>
             ))}
           </select>
         </div>
@@ -90,3 +89,27 @@ export default function TemplesPage() {
         {/* Results */}
         {loading ? (
           <p style={{ textAlign: 'center', padding: '60px', color: '#666' }}>Loading temples...</p>
+        ) : filteredTemples.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '60px', background: 'white', borderRadius: '12px' }}>
+            <p style={{ fontSize: '3rem', marginBottom: '15px' }}>🛕</p>
+            <p style={{ color: '#666', marginBottom: '20px' }}>No temples found. Try adjusting your filters.</p>
+            <Link href="/admin/temples/new" style={{ color: '#FF6B00' }}>Add temple (Admin) →</Link>
+          </div>
+        ) : (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '25px' }}>
+            {filteredTemples.map((temple) => (
+              <div key={temple.id} style={{ background: 'white', padding: '25px', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.08)' }}>
+                <div style={{ fontSize: '2rem', marginBottom: '10px' }}>
+                  {temple.type === 'hindu_temple' ? '🛕' : temple.type === 'sikh_gurdwara' ? '🙏' : '⛪'}
+                </div>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.2rem', color: '#1A1A1A', marginBottom: '10px' }}>{temple.name}</h3>
+                <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '5px' }}>{temple.address}</p>
+                <p style={{ color: '#888', fontSize: '0.85rem' }}>{temple.city}, {temple.state?.replace('_', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
