@@ -40,7 +40,6 @@ export default function TemplesPage() {
         <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: '3rem', color: 'white', marginBottom: '10px' }}>Temple Finder</h1>
         <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.1rem' }}>Find Hindu temples across Malaysia</p>
       </div>
-
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px' }}>
         {loading ? (
           <p style={{ textAlign: 'center', padding: '60px', color: '#666' }}>Loading temples...</p>
