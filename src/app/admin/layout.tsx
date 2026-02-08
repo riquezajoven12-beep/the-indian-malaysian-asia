@@ -8,6 +8,7 @@ export default function AdminLayout({
   const navItems = [
     { name: 'Dashboard', href: '/admin', icon: '🏠' },
     { name: 'Articles', href: '/admin/articles', icon: '📝' },
+    { name: 'Featured Story', href: '/admin/featured', icon: '⭐' },
     { name: 'Events', href: '/admin/events', icon: '📅' },
     { name: 'Persatuan', href: '/admin/persatuan', icon: '🏛️' },
     { name: 'Temples', href: '/admin/temples', icon: '🛕' },
