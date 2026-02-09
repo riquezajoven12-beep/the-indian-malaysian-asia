@@ -4,15 +4,17 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function HomePage() {
-  const [featured, setFeatured] = useState<any>(null);
+  const [featured, setFeatured] = useState(null);
 
-  useEffect(() => {
+  useEffect(function() {
     fetch('/api/featured')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.id) setFeatured(data);
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data && data.id) {
+          setFeatured(data);
+        }
       })
-      .catch(() => {});
+      .catch(function() {});
   }, []);
 
   return (
@@ -36,7 +38,7 @@ export default function HomePage() {
                 மலேசிய இந்தியர்கள்
               </span>
             </Link>
-            {/* SUBSCRIBE BUTTON - NOW WORKS */}
+            {/* FIXED: Now goes to /subscribe instead of /donate */}
             <Link href="/subscribe" style={{ background: 'linear-gradient(135deg, #FF6B00 0%, #8B1538 100%)', color: 'white', border: 'none', padding: '12px 28px', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer', textDecoration: 'none' }}>
               SUBSCRIBE
             </Link>
@@ -64,16 +66,4 @@ export default function HomePage() {
               Preserving Heritage.<br />
               <span style={{ color: '#F4D03F' }}>Building Futures.</span>
             </h1>
-            <p style={{ fontSize: '1.25rem', color: 'rgba(255, 255, 255, 0.9)', marginBottom: '40px', maxWidth: '500px' }}>
-              Your trusted source for news, education, and cultural preservation of the Indian Malaysian community. Connecting 2 million voices across the nation.
-            </p>
-            <div style={{ display: 'flex', gap: '50px' }}>
-              {[
-                { number: '2M+', label: 'Community Members' },
-                { number: '180+', label: 'Years of History' },
-                { number: '500+', label: 'Registered Persatuan' },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div style={{ fontFamily: "'Playfair Display', serif", fontSize: '3rem', fontWeight: 700, color: '#F4D03F', lineHeight: 1 }}>{stat.number}</div>
-                  <div style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.8)', letterSpacing: '1px', textTransform: 'uppercase', marginTop: '5px' }}>{stat.label}</div>
-                </d
+            <p style={{ fontSize: '1.25rem', color: 'rgba(255, 255, 255, 0.9)', marginBottom: '40px', maxWidth: '500p
