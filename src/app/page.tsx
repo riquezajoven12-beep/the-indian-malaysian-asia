@@ -2,284 +2,262 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function HomePage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+/* ============================================================
+   SHARED HEADER — mobile‑responsive with hamburger menu
+   ============================================================ */
+function Header() {
+  const [open, setOpen] = useState(false);
+
+  const navLinks = [
+    { href: '/about', label: 'About' },
+    { href: '/news', label: 'News' },
+    { href: '/events', label: 'Events' },
+    { href: '/temples', label: 'Temples' },
+    { href: '/education', label: 'Education' },
+    { href: '/community', label: 'Community' },
+    { href: '/login', label: 'Login' },
+  ];
 
   return (
-    <div style={{ fontFamily: 'Source Sans 3, sans-serif', background: '#FFFCF7', color: '#2D2D2D', lineHeight: 1.7 }}>
-      
-      {/* Announcement Bar */}
-      <div style={{ background: 'linear-gradient(135deg, #8B1538 0%, #1A1A1A 100%)', color: 'white', padding: '10px 20px', fontSize: '0.85rem', textAlign: 'center' }}>
-        <span>🪔 Celebrating Thaipusam 2026</span>
+    <>
+      {/* Thaipusam Banner */}
+      <div style={{ background: 'linear-gradient(90deg, #8B1538, #D4AF37)', padding: '8px 20px', textAlign: 'center', fontSize: '0.9rem', color: 'white' }}>
+        🪔 Celebrating Thaipusam 2026
       </div>
 
-      {/* Header */}
-      <header style={{ background: '#FFFCF7', borderBottom: '1px solid rgba(212, 175, 55, 0.3)', position: 'sticky', top: 0, zIndex: 1000 }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '15px 20px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Link href="/">
-              <div>
-                <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.5rem', fontWeight: 800, color: '#1A1A1A' }}>
-                  The Indian <span style={{ color: '#FF6B00' }}>Malaysian</span>
-                </span>
-                <br />
-                <span style={{ fontFamily: 'Noto Sans Tamil, sans-serif', fontSize: '0.8rem', color: '#8B1538' }}>
-                  மலேசிய இந்தியர்கள்
-                </span>
-              </div>
+      <header style={{ background: '#1A1A1A', padding: '15px 20px', position: 'sticky', top: 0, zIndex: 1000 }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <Link href="/" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.2rem, 4vw, 1.8rem)', fontWeight: 800, color: 'white', whiteSpace: 'nowrap' }}>
+              The Indian <span style={{ color: '#FF6B00' }}>Malaysian</span>
             </Link>
-            
-            {/* Mobile Menu Button */}
-            <button 
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              style={{ display: 'none', background: 'none', border: 'none', fontSize: '1.8rem', cursor: 'pointer', padding: '5px' }}
-              className="mobile-menu-btn"
-            >
-              {mobileMenuOpen ? '✕' : '☰'}
-            </button>
-
-            {/* Desktop Nav */}
-            <nav className="desktop-nav" style={{ display: 'flex', gap: '25px', alignItems: 'center' }}>
-              <Link href="/about" style={{ color: '#2D2D2D', fontWeight: 500, fontSize: '0.9rem' }}>About</Link>
-              <Link href="/news" style={{ color: '#2D2D2D', fontWeight: 500, fontSize: '0.9rem' }}>News</Link>
-              <Link href="/events" style={{ color: '#2D2D2D', fontWeight: 500, fontSize: '0.9rem' }}>Events</Link>
-              <Link href="/temples" style={{ color: '#2D2D2D', fontWeight: 500, fontSize: '0.9rem' }}>Temples</Link>
-              <Link href="/education" style={{ color: '#2D2D2D', fontWeight: 500, fontSize: '0.9rem' }}>Education</Link>
-              <Link href="/community" style={{ color: '#2D2D2D', fontWeight: 500, fontSize: '0.9rem' }}>Community</Link>
-              <Link href="/login" style={{ color: '#666', fontWeight: 500 }}>Login</Link>
-              <Link href="/pricing" style={{ background: 'linear-gradient(135deg, #FF6B00 0%, #8B1538 100%)', color: 'white', padding: '10px 20px', fontWeight: 600, fontSize: '0.85rem', borderRadius: '4px' }}>
-                SUBSCRIBE
-              </Link>
-            </nav>
+            <div style={{ fontFamily: "'Noto Sans Tamil', sans-serif", color: '#D4AF37', fontSize: '0.7rem' }}>மலேசிய இந்தியர்கள்</div>
           </div>
 
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <nav style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #eee' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                <Link href="/about" style={{ color: '#2D2D2D', fontWeight: 500, padding: '10px 0' }}>About</Link>
-                <Link href="/news" style={{ color: '#2D2D2D', fontWeight: 500, padding: '10px 0' }}>News</Link>
-                <Link href="/events" style={{ color: '#2D2D2D', fontWeight: 500, padding: '10px 0' }}>Events</Link>
-                <Link href="/temples" style={{ color: '#2D2D2D', fontWeight: 500, padding: '10px 0' }}>Temples</Link>
-                <Link href="/education" style={{ color: '#2D2D2D', fontWeight: 500, padding: '10px 0' }}>Education</Link>
-                <Link href="/community" style={{ color: '#2D2D2D', fontWeight: 500, padding: '10px 0' }}>Community</Link>
-                <Link href="/associations" style={{ color: '#2D2D2D', fontWeight: 500, padding: '10px 0' }}>Associations</Link>
-                <Link href="/jobs" style={{ color: '#2D2D2D', fontWeight: 500, padding: '10px 0' }}>Jobs</Link>
-                <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-                  <Link href="/login" style={{ flex: 1, textAlign: 'center', padding: '12px', border: '1px solid #ddd', borderRadius: '8px' }}>Login</Link>
-                  <Link href="/pricing" style={{ flex: 1, textAlign: 'center', padding: '12px', background: '#FF6B00', color: 'white', borderRadius: '8px', fontWeight: 600 }}>Subscribe</Link>
-                </div>
-              </div>
-            </nav>
-          )}
+          {/* Desktop Nav */}
+          <nav className="desktop-nav" style={{ display: 'flex', gap: '20px', alignItems: 'center', fontSize: '0.95rem' }}>
+            {navLinks.map(l => (
+              <Link key={l.href} href={l.href} style={{ color: 'rgba(255,255,255,0.85)', transition: '0.2s' }}>{l.label}</Link>
+            ))}
+            <Link href="/pricing" style={{ background: '#FF6B00', color: 'white', padding: '10px 20px', borderRadius: '6px', fontWeight: 600 }}>SUBSCRIBE</Link>
+          </nav>
+
+          {/* Hamburger */}
+          <button className="hamburger-btn" onClick={() => setOpen(!open)} aria-label="Menu"
+            style={{ display: 'none', flexDirection: 'column', gap: '5px', padding: '8px', background: 'none', border: 'none', cursor: 'pointer', zIndex: 1001 }}>
+            <span style={{ width: 24, height: 2, background: 'white', display: 'block', borderRadius: 2, transition: '0.3s', transform: open ? 'rotate(45deg) translateY(7px)' : 'none' }} />
+            <span style={{ width: 24, height: 2, background: 'white', display: 'block', borderRadius: 2, transition: '0.3s', opacity: open ? 0 : 1 }} />
+            <span style={{ width: 24, height: 2, background: 'white', display: 'block', borderRadius: 2, transition: '0.3s', transform: open ? 'rotate(-45deg) translateY(-7px)' : 'none' }} />
+          </button>
         </div>
+
+        {/* Mobile Fullscreen Overlay */}
+        {open && (
+          <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.97)', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '18px', animation: 'fadeIn .3s ease' }}>
+            <button onClick={() => setOpen(false)} style={{ position: 'absolute', top: 20, right: 20, color: 'white', fontSize: '2rem', background: 'none', border: 'none', cursor: 'pointer' }}>✕</button>
+            <Link href="/" onClick={() => setOpen(false)} style={{ color: 'white', fontSize: '1.3rem', fontWeight: 500 }}>Home</Link>
+            {navLinks.map(l => (
+              <Link key={l.href} href={l.href} onClick={() => setOpen(false)} style={{ color: 'white', fontSize: '1.3rem', fontWeight: 500 }}>{l.label}</Link>
+            ))}
+            <Link href="/associations" onClick={() => setOpen(false)} style={{ color: 'white', fontSize: '1.3rem', fontWeight: 500 }}>Associations</Link>
+            <Link href="/jobs" onClick={() => setOpen(false)} style={{ color: 'white', fontSize: '1.3rem', fontWeight: 500 }}>Jobs</Link>
+            <Link href="/pricing" onClick={() => setOpen(false)} style={{ background: '#FF6B00', color: 'white', padding: '14px 40px', borderRadius: '8px', fontWeight: 700, fontSize: '1.1rem', marginTop: '10px' }}>SUBSCRIBE</Link>
+          </div>
+        )}
       </header>
 
-      {/* Hero Section */}
-      <section style={{ background: 'linear-gradient(135deg, #1A1A1A 0%, #8B1538 50%, #FF6B00 100%)', minHeight: '80vh', display: 'flex', alignItems: 'center', padding: '40px 20px' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
-          <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'center' }}>
-            <div>
-              <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, color: 'white', lineHeight: 1.1, marginBottom: '20px' }}>
-                Preserving Heritage.<br />
-                <span style={{ color: '#F4D03F' }}>Building Futures.</span>
-              </h1>
-              <p style={{ fontFamily: 'Noto Sans Tamil, sans-serif', color: '#D4AF37', fontSize: '1rem', marginBottom: '15px' }}>
-                பாரம்பரியத்தைப் பாதுகாத்தல். எதிர்காலத்தை உருவாக்குதல்.
-              </p>
-              <p style={{ fontSize: '1.1rem', color: 'rgba(255, 255, 255, 0.9)', marginBottom: '30px' }}>
-                Your trusted source for news, education, and cultural preservation of the Indian Malaysian community.
-              </p>
-              <div className="stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
-                <div>
-                  <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 700, color: '#F4D03F' }}>2M+</div>
-                  <div style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.8)' }}>Community</div>
-                </div>
-                <div>
-                  <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 700, color: '#F4D03F' }}>180+</div>
-                  <div style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.8)' }}>Years</div>
-                </div>
-                <div>
-                  <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 700, color: '#F4D03F' }}>500+</div>
-                  <div style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.8)' }}>Associations</div>
-                </div>
-              </div>
-            </div>
+      <style jsx global>{`
+        @media (max-width: 1024px) {
+          .desktop-nav { display: none !important; }
+          .hamburger-btn { display: flex !important; }
+        }
+        @media (min-width: 1025px) {
+          .hamburger-btn { display: none !important; }
+        }
+      `}</style>
+    </>
+  );
+}
 
-            <Link href="/news" style={{ display: 'block' }}>
-              <div style={{ background: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255, 255, 255, 0.2)', padding: '30px', borderRadius: '12px', position: 'relative' }}>
-                <span style={{ position: 'absolute', top: '-12px', left: '20px', background: '#D4AF37', color: '#1A1A1A', padding: '6px 15px', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase' }}>Featured</span>
-                <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.4rem', color: 'white', marginBottom: '15px', lineHeight: 1.3 }}>
-                  The Rise of Indian Malaysian Entrepreneurs
-                </h2>
-                <p style={{ color: 'rgba(255, 255, 255, 0.8)', marginBottom: '20px', fontSize: '0.95rem' }}>
-                  How young Indian Malaysians are transforming the business landscape.
-                </p>
-                <span style={{ color: '#D4AF37', fontWeight: 600 }}>Read More →</span>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Latest News */}
-      <section style={{ padding: '60px 20px', maxWidth: '1400px', margin: '0 auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', flexWrap: 'wrap', gap: '15px' }}>
+/* ============================================================
+   SHARED FOOTER — responsive grid
+   ============================================================ */
+function Footer() {
+  return (
+    <footer style={{ background: '#1A1A1A', padding: '50px 20px 30px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '30px', marginBottom: '30px' }}>
           <div>
-            <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', fontWeight: 700, color: '#1A1A1A' }}>Latest News</h2>
-            <p style={{ fontFamily: 'Noto Sans Tamil, sans-serif', fontSize: '1rem', color: '#8B1538' }}>சமீபத்திய செய்திகள்</p>
+            <Link href="/" style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.3rem', fontWeight: 800, color: 'white' }}>The Indian <span style={{ color: '#FF6B00' }}>Malaysian</span></Link>
+            <p style={{ color: 'rgba(255,255,255,0.5)', marginTop: '10px', fontSize: '0.9rem', lineHeight: 1.6 }}>Your trusted source for news, education, and cultural preservation.</p>
           </div>
-          <Link href="/news" style={{ color: '#FF6B00', fontWeight: 600 }}>View All →</Link>
+          <div>
+            <h4 style={{ color: '#D4AF37', fontWeight: 600, marginBottom: '12px', fontSize: '0.9rem' }}>Quick Links</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <Link href="/about" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>About</Link>
+              <Link href="/news" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>News</Link>
+              <Link href="/events" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Events</Link>
+            </div>
+          </div>
+          <div>
+            <h4 style={{ color: '#D4AF37', fontWeight: 600, marginBottom: '12px', fontSize: '0.9rem' }}>Community</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <Link href="/temples" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Temples</Link>
+              <Link href="/associations" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Associations</Link>
+              <Link href="/jobs" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Jobs</Link>
+            </div>
+          </div>
+          <div>
+            <h4 style={{ color: '#D4AF37', fontWeight: 600, marginBottom: '12px', fontSize: '0.9rem' }}>Legal</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <Link href="/privacy" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Privacy</Link>
+              <Link href="/terms" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Terms</Link>
+              <Link href="/contact" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Contact</Link>
+            </div>
+          </div>
         </div>
-        
-        <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '25px' }}>
-          {[
-            { title: 'Cabinet Approves New Indian Blueprint', cat: 'Politics', color: '#FF6B00', img: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&q=80' },
-            { title: 'Tamil Schools See Record Enrollment', cat: 'Education', color: '#1B4332', img: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80' },
-            { title: 'Batu Caves Prepares for Thaipusam', cat: 'Culture', color: '#8B1538', img: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=800&q=80' },
-          ].map((article, i) => (
-            <Link href="/news" key={i}>
-              <div style={{ background: 'white', border: '1px solid rgba(212, 175, 55, 0.3)', overflow: 'hidden', borderRadius: '12px' }}>
-                <div style={{ height: '180px', position: 'relative', overflow: 'hidden' }}>
-                  <img src={article.img} alt={article.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <span style={{ position: 'absolute', top: '12px', left: '12px', background: article.color, color: 'white', padding: '4px 12px', fontSize: '0.7rem', fontWeight: 600, borderRadius: '4px' }}>{article.cat.toUpperCase()}</span>
-                </div>
-                <div style={{ padding: '20px' }}>
-                  <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.1rem', fontWeight: 600, color: '#1A1A1A', marginBottom: '10px', lineHeight: 1.4 }}>{article.title}</h3>
-                  <span style={{ fontSize: '0.85rem', color: '#FF6B00', fontWeight: 600 }}>Read More →</span>
-                </div>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '20px', textAlign: 'center' }}>
+          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>© 2026 The Indian Malaysian. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* ============================================================
+   HOMEPAGE
+   ============================================================ */
+export default function HomePage() {
+  return (
+    <div style={{ minHeight: '100vh', background: '#FFFCF7' }}>
+      <Header />
+
+      {/* HERO */}
+      <section style={{
+        background: 'linear-gradient(135deg, #1A1A1A 0%, #8B1538 50%, #1A1A1A 100%)',
+        padding: 'clamp(50px, 10vw, 100px) 20px',
+        textAlign: 'center', position: 'relative'
+      }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem, 6vw, 3.5rem)', color: 'white', marginBottom: '15px', lineHeight: 1.2 }}>
+            Preserving Heritage.<br />Building Futures.
+          </h1>
+          <p style={{ fontFamily: "'Noto Sans Tamil', sans-serif", color: '#D4AF37', fontSize: 'clamp(0.85rem, 2.5vw, 1.1rem)', marginBottom: '12px' }}>
+            பாரம்பரியத்தைப் பாதுகாத்தல். எதிர்காலத்தை உருவாக்குதல்.
+          </p>
+          <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 'clamp(0.9rem, 2.5vw, 1.15rem)', maxWidth: '600px', margin: '0 auto 35px' }}>
+            Your trusted source for news, education, and cultural preservation of the Indian Malaysian community.
+          </p>
+          <div style={{ display: 'flex', gap: 'clamp(15px, 4vw, 40px)', justifyContent: 'center', flexWrap: 'wrap' }}>
+            {[{ v: '2M+', l: 'Community' }, { v: '180+', l: 'Years' }, { v: '500+', l: 'Associations' }].map(s => (
+              <div key={s.l}>
+                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 700, color: '#D4AF37' }}>{s.v}</div>
+                <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem' }}>{s.l}</div>
               </div>
-            </Link>
-          ))}
-        </div>
-
-        <div style={{ marginTop: '30px', textAlign: 'center', padding: '15px', background: '#FFF5F0', borderRadius: '12px' }}>
-          <p style={{ color: '#666', fontSize: '0.9rem' }}>📰 You have <strong style={{ color: '#FF6B00' }}>3 free articles</strong> remaining. <Link href="/pricing" style={{ color: '#FF6B00', fontWeight: 600 }}>Subscribe for unlimited →</Link></p>
-        </div>
-      </section>
-
-      {/* Quick Links */}
-      <section style={{ background: '#f8f8f8', padding: '60px 20px' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', textAlign: 'center', marginBottom: '40px' }}>Explore Our Community</h2>
-          
-          <div className="grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
-            {[
-              { icon: '🏛️', title: 'Associations', desc: '500+ registered', href: '/associations', badge: 'BASIC', badgeColor: '#1565C0' },
-              { icon: '📅', title: 'Events', desc: 'Festivals & gatherings', href: '/events', badge: 'FREE', badgeColor: '#2E7D32' },
-              { icon: '💼', title: 'Jobs', desc: 'Career opportunities', href: '/jobs', badge: 'BASIC', badgeColor: '#1565C0' },
-              { icon: '🛕', title: 'Temples', desc: '3,000+ temples', href: '/temples', badge: 'FREE', badgeColor: '#2E7D32' },
-            ].map((item, i) => (
-              <Link href={item.href} key={i}>
-                <div style={{ background: 'white', padding: '25px', borderRadius: '12px', textAlign: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-                  <div style={{ fontSize: '2.5rem', marginBottom: '10px' }}>{item.icon}</div>
-                  <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.1rem', color: '#1A1A1A', marginBottom: '5px' }}>{item.title}</h3>
-                  <p style={{ color: '#666', fontSize: '0.85rem', marginBottom: '10px' }}>{item.desc}</p>
-                  <span style={{ display: 'inline-block', background: item.badgeColor === '#2E7D32' ? '#E8F5E9' : '#E3F2FD', color: item.badgeColor, padding: '3px 8px', borderRadius: '10px', fontSize: '0.65rem', fontWeight: 600 }}>{item.badge}</span>
-                </div>
-              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing Preview */}
-      <section style={{ padding: '60px 20px', maxWidth: '1200px', margin: '0 auto' }}>
-        <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', textAlign: 'center', marginBottom: '40px' }}>Choose Your Plan</h2>
-        
-        <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '25px' }}>
-          {/* Free */}
-          <div style={{ background: 'white', padding: '30px', borderRadius: '16px', boxShadow: '0 2px 15px rgba(0,0,0,0.08)', textAlign: 'center' }}>
-            <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.3rem', marginBottom: '10px' }}>Free</h3>
-            <div style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '20px' }}>RM 0<span style={{ fontSize: '0.9rem', color: '#888' }}>/mo</span></div>
-            <ul style={{ textAlign: 'left', marginBottom: '25px', fontSize: '0.9rem' }}>
-              <li style={{ padding: '8px 0', borderBottom: '1px solid #eee' }}>✓ 3 articles/month</li>
-              <li style={{ padding: '8px 0', borderBottom: '1px solid #eee' }}>✓ Events & Temples</li>
-              <li style={{ padding: '8px 0', color: '#ccc' }}>✗ Associations</li>
-              <li style={{ padding: '8px 0', color: '#ccc' }}>✗ Job board</li>
-            </ul>
-            <span style={{ display: 'inline-block', background: '#f0f0f0', color: '#666', padding: '10px 25px', borderRadius: '8px' }}>Current</span>
-          </div>
+      {/* FEATURED */}
+      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px' }}>
+        <Link href="/news" style={{ display: 'block', background: 'linear-gradient(135deg, #0D5C63, #1B4332)', borderRadius: '16px', padding: 'clamp(25px, 5vw, 40px)', color: 'white' }}>
+          <span style={{ background: '#D4AF37', color: '#1A1A1A', padding: '4px 12px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700, display: 'inline-block', marginBottom: '12px' }}>Featured</span>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.3rem, 3.5vw, 2rem)', marginBottom: '10px' }}>The Rise of Indian Malaysian Entrepreneurs</h2>
+          <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '1rem' }}>How young Indian Malaysians are transforming the business landscape.</p>
+          <span style={{ color: '#D4AF37', marginTop: '12px', display: 'inline-block', fontWeight: 600 }}>Read More →</span>
+        </Link>
+      </section>
 
-          {/* Basic */}
-          <div style={{ background: 'linear-gradient(135deg, #1A1A1A 0%, #8B1538 100%)', padding: '30px', borderRadius: '16px', textAlign: 'center', color: 'white', position: 'relative' }}>
-            <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', background: '#D4AF37', color: '#1A1A1A', padding: '4px 12px', borderRadius: '15px', fontSize: '0.7rem', fontWeight: 700 }}>POPULAR</div>
-            <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.3rem', marginBottom: '10px' }}>Basic</h3>
-            <div style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '20px' }}>RM 9.90<span style={{ fontSize: '0.9rem', opacity: 0.8 }}>/mo</span></div>
-            <ul style={{ textAlign: 'left', marginBottom: '25px', fontSize: '0.9rem' }}>
-              <li style={{ padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.2)' }}>✓ Unlimited articles</li>
-              <li style={{ padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.2)' }}>✓ Associations</li>
-              <li style={{ padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.2)' }}>✓ Job board</li>
-              <li style={{ padding: '8px 0' }}>✓ Scholarships</li>
-            </ul>
-            <Link href="/subscribe" style={{ display: 'inline-block', background: '#D4AF37', color: '#1A1A1A', padding: '10px 25px', borderRadius: '8px', fontWeight: 700 }}>Subscribe</Link>
+      {/* LATEST NEWS */}
+      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 20px 40px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', flexWrap: 'wrap', gap: '10px' }}>
+          <div>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.5rem, 3.5vw, 2rem)', color: '#1A1A1A' }}>Latest News</h2>
+            <p style={{ fontFamily: "'Noto Sans Tamil', sans-serif", color: '#D4AF37', fontSize: '0.85rem' }}>சமீபத்திய செய்திகள்</p>
           </div>
+          <Link href="/news" style={{ color: '#FF6B00', fontWeight: 600 }}>View All →</Link>
+        </div>
 
-          {/* Premium */}
-          <div style={{ background: 'white', padding: '30px', borderRadius: '16px', boxShadow: '0 2px 15px rgba(0,0,0,0.08)', textAlign: 'center', border: '2px solid #D4AF37' }}>
-            <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.3rem', marginBottom: '10px' }}>Premium</h3>
-            <div style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '20px' }}>RM 19.90<span style={{ fontSize: '0.9rem', color: '#888' }}>/mo</span></div>
-            <ul style={{ textAlign: 'left', marginBottom: '25px', fontSize: '0.9rem' }}>
-              <li style={{ padding: '8px 0', borderBottom: '1px solid #eee' }}>✓ Everything in Basic</li>
-              <li style={{ padding: '8px 0', borderBottom: '1px solid #eee' }}>✓ Exclusive content</li>
-              <li style={{ padding: '8px 0', borderBottom: '1px solid #eee' }}>✓ Community forum</li>
-              <li style={{ padding: '8px 0' }}>✓ No ads</li>
-            </ul>
-            <Link href="/subscribe" style={{ display: 'inline-block', background: '#FF6B00', color: 'white', padding: '10px 25px', borderRadius: '8px', fontWeight: 700 }}>Go Premium</Link>
-          </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))', gap: '25px' }}>
+          {[
+            { img: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&q=80', cat: 'POLITICS', title: 'Cabinet Approves New Indian Blueprint' },
+            { img: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80', cat: 'EDUCATION', title: 'Tamil Schools See Record Enrollment' },
+            { img: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=800&q=80', cat: 'CULTURE', title: 'Batu Caves Prepares for Thaipusam' },
+          ].map(n => (
+            <Link key={n.title} href="/news" style={{ background: 'white', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.08)', transition: '0.3s' }}>
+              <div style={{ height: '180px', backgroundImage: `url(${n.img})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+              <div style={{ padding: '18px' }}>
+                <span style={{ color: '#FF6B00', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.5px' }}>{n.cat}</span>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.1rem', marginTop: '6px', color: '#1A1A1A' }}>{n.title}</h3>
+                <span style={{ color: '#FF6B00', fontSize: '0.9rem', marginTop: '10px', display: 'inline-block' }}>Read More →</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* Article limit notice */}
+        <div style={{ background: 'linear-gradient(90deg, #FFF8E1, #FFFCF7)', border: '1px solid #D4AF37', borderRadius: '10px', padding: '14px 20px', marginTop: '25px', textAlign: 'center', fontSize: '0.95rem' }}>
+          📰 You have <strong>3 free articles</strong> remaining. <Link href="/pricing" style={{ color: '#FF6B00', fontWeight: 600 }}>Subscribe for unlimited →</Link>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer style={{ background: '#1A1A1A', padding: '60px 20px 30px' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '40px', marginBottom: '40px' }}>
-            <div>
-              <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.5rem', fontWeight: 800, color: 'white' }}>
-                The Indian <span style={{ color: '#FF6B00' }}>Malaysian</span>
-              </span>
-              <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.9rem', marginTop: '15px' }}>
-                Your trusted source for news, education, and cultural preservation.
-              </p>
-            </div>
-            <div>
-              <h4 style={{ color: 'white', marginBottom: '15px' }}>Quick Links</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <Link href="/about" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>About</Link>
-                <Link href="/news" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>News</Link>
-                <Link href="/events" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Events</Link>
-              </div>
-            </div>
-            <div>
-              <h4 style={{ color: 'white', marginBottom: '15px' }}>Community</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <Link href="/temples" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Temples</Link>
-                <Link href="/associations" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Associations</Link>
-                <Link href="/jobs" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Jobs</Link>
-              </div>
-            </div>
-            <div>
-              <h4 style={{ color: 'white', marginBottom: '15px' }}>Legal</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <Link href="/privacy" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Privacy</Link>
-                <Link href="/terms" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Terms</Link>
-                <Link href="/contact" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>Contact</Link>
-              </div>
-            </div>
-          </div>
-          <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.1)', textAlign: 'center' }}>
-            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>© 2026 The Indian Malaysian. All rights reserved.</p>
-          </div>
+      {/* EXPLORE COMMUNITY */}
+      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 20px 50px' }}>
+        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.5rem, 3.5vw, 2rem)', textAlign: 'center', marginBottom: '30px', color: '#1A1A1A' }}>Explore Our Community</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 240px), 1fr))', gap: '20px' }}>
+          {[
+            { icon: '🏛️', title: 'Associations', sub: '500+ registered', tier: 'BASIC', href: '/associations' },
+            { icon: '📅', title: 'Events', sub: 'Festivals & gatherings', tier: 'FREE', href: '/events' },
+            { icon: '💼', title: 'Jobs', sub: 'Career opportunities', tier: 'BASIC', href: '/jobs' },
+            { icon: '🛕', title: 'Temples', sub: '3,000+ temples', tier: 'FREE', href: '/temples' },
+          ].map(c => (
+            <Link key={c.title} href={c.href} style={{
+              background: 'white', borderRadius: '12px', padding: '25px', textAlign: 'center',
+              boxShadow: '0 2px 12px rgba(0,0,0,0.06)', border: '1px solid #eee', transition: '0.3s'
+            }}>
+              <div style={{ fontSize: '2.5rem', marginBottom: '10px' }}>{c.icon}</div>
+              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.15rem', color: '#1A1A1A' }}>{c.title}</h3>
+              <p style={{ color: '#888', fontSize: '0.9rem', margin: '6px 0 10px' }}>{c.sub}</p>
+              <span style={{ background: c.tier === 'FREE' ? '#E8F5E9' : '#FFF3E0', color: c.tier === 'FREE' ? '#2E7D32' : '#E65100', padding: '3px 10px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700 }}>{c.tier}</span>
+            </Link>
+          ))}
         </div>
-      </footer>
+      </section>
 
-      {/* Mobile Menu Button Styles */}
-      <style jsx>{`
-        @media (max-width: 1024px) {
-          .desktop-nav { display: none !important; }
-          .mobile-menu-btn { display: block !important; }
-        }
-      `}</style>
+      {/* PRICING */}
+      <section style={{ background: '#F5F0E8', padding: '50px 20px' }}>
+        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.5rem, 3.5vw, 2rem)', textAlign: 'center', marginBottom: '30px', color: '#1A1A1A' }}>Choose Your Plan</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '25px', maxWidth: '900px', margin: '0 auto' }}>
+          {[
+            { name: 'Free', price: 'RM 0', features: ['3 articles/month', 'Events & Temples'], no: ['Associations', 'Job board'], btn: 'Current', primary: false },
+            { name: 'Basic', price: 'RM 9.90', features: ['Unlimited articles', 'Associations', 'Job board', 'Scholarships'], no: [], btn: 'Subscribe', primary: true, pop: true },
+            { name: 'Premium', price: 'RM 19.90', features: ['Everything in Basic', 'Exclusive content', 'Community forum', 'No ads'], no: [], btn: 'Go Premium', primary: false },
+          ].map(p => (
+            <div key={p.name} style={{
+              background: 'white', borderRadius: '16px', padding: '30px 25px', textAlign: 'center',
+              border: p.pop ? '2px solid #FF6B00' : '1px solid #ddd', position: 'relative',
+              boxShadow: p.pop ? '0 8px 30px rgba(255,107,0,0.15)' : '0 2px 12px rgba(0,0,0,0.06)'
+            }}>
+              {p.pop && <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', background: '#FF6B00', color: 'white', padding: '3px 16px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700 }}>POPULAR</div>}
+              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.4rem', marginBottom: '5px' }}>{p.name}</h3>
+              <div style={{ fontSize: '1.8rem', fontWeight: 700, color: '#1A1A1A', marginBottom: '20px' }}>{p.price}<span style={{ fontSize: '0.9rem', fontWeight: 400, color: '#888' }}>/mo</span></div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px', textAlign: 'left' }}>
+                {p.features.map(f => <div key={f} style={{ fontSize: '0.9rem', color: '#444' }}>✓ {f}</div>)}
+                {p.no.map(f => <div key={f} style={{ fontSize: '0.9rem', color: '#ccc' }}>✗ {f}</div>)}
+              </div>
+              <Link href="/subscribe" style={{
+                display: 'block', padding: '12px', borderRadius: '8px', fontWeight: 700,
+                background: p.primary ? '#FF6B00' : 'transparent',
+                color: p.primary ? 'white' : '#1A1A1A',
+                border: p.primary ? 'none' : '2px solid #ddd'
+              }}>{p.btn}</Link>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 }

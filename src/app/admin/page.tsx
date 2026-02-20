@@ -1,135 +1,108 @@
+'use client';
 import Link from 'next/link';
 
-export default function AdminPage() {
+const stats = [
+  { label: 'Total Articles', value: '156', icon: '📰', color: '#FF6B00', bg: '#FFF3E0' },
+  { label: 'Active Events', value: '12', icon: '📅', color: '#0D5C63', bg: '#E0F2F1' },
+  { label: 'Temples Listed', value: '3,247', icon: '🛕', color: '#8B1538', bg: '#FCE4EC' },
+  { label: 'Subscribers', value: '1,892', icon: '👥', color: '#D4AF37', bg: '#FFF8E1' },
+  { label: 'Persatuan', value: '523', icon: '🏛️', color: '#1B4332', bg: '#E8F5E9' },
+  { label: 'Job Listings', value: '45', icon: '💼', color: '#4A148C', bg: '#F3E5F5' },
+];
+
+const quickActions = [
+  { label: 'New Article', href: '/admin/articles/new', icon: '✏️' },
+  { label: 'New Event', href: '/admin/events/new', icon: '📅' },
+  { label: 'New Temple', href: '/admin/temples/new', icon: '🛕' },
+  { label: 'New Persatuan', href: '/admin/persatuan/new', icon: '🏛️' },
+  { label: 'New Job', href: '/admin/jobs/new', icon: '💼' },
+  { label: 'Manage Featured', href: '/admin/featured', icon: '⭐' },
+];
+
+const recentItems = [
+  { title: 'Cabinet Approves New Indian Blueprint', type: 'Article', date: '2 hours ago', status: 'Published' },
+  { title: 'Tamil Schools See Record Enrollment', type: 'Article', date: '5 hours ago', status: 'Published' },
+  { title: 'Thaipusam 2026 — Batu Caves', type: 'Event', date: '1 day ago', status: 'Upcoming' },
+  { title: 'Software Developer — TCS Malaysia', type: 'Job', date: '1 day ago', status: 'Active' },
+  { title: 'Sri Mahamariamman Temple KL', type: 'Temple', date: '3 days ago', status: 'Verified' },
+];
+
+export default function AdminDashboard() {
   return (
-    <div style={{ minHeight: '100vh', background: '#f5f5f5', fontFamily: 'system-ui, sans-serif' }}>
-      {/* Header */}
-      <header style={{ background: '#1A1A1A', padding: '15px 20px' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-            <Link href="/" style={{ fontSize: '1.3rem', fontWeight: 800, color: 'white', textDecoration: 'none' }}>
-              The Indian <span style={{ color: '#FF6B00' }}>Malaysian</span>
+    <div>
+      <div style={{ marginBottom: '30px' }}>
+        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.5rem, 4vw, 2rem)', color: '#1A1A1A', marginBottom: '5px' }}>Dashboard</h1>
+        <p style={{ color: '#64748B', fontSize: '0.95rem' }}>Welcome back! Here&apos;s what&apos;s happening with The Indian Malaysian.</p>
+      </div>
+
+      {/* Stats Grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 170px), 1fr))', gap: '15px', marginBottom: '30px' }}>
+        {stats.map(s => (
+          <div key={s.label} style={{
+            background: 'white', borderRadius: '12px', padding: '20px',
+            boxShadow: '0 1px 8px rgba(0,0,0,0.06)', border: '1px solid #E2E8F0'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '10px' }}>
+              <span style={{ fontSize: '1.8rem' }}>{s.icon}</span>
+              <span style={{ background: s.bg, color: s.color, padding: '2px 8px', borderRadius: '6px', fontSize: '0.7rem', fontWeight: 600 }}>View</span>
+            </div>
+            <div style={{ fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', fontWeight: 700, color: '#1A1A1A' }}>{s.value}</div>
+            <div style={{ color: '#94A3B8', fontSize: '0.8rem' }}>{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Quick Actions */}
+      <div style={{ marginBottom: '30px' }}>
+        <h2 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#1A1A1A', marginBottom: '15px' }}>Quick Actions</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 150px), 1fr))', gap: '12px' }}>
+          {quickActions.map(a => (
+            <Link key={a.label} href={a.href} style={{
+              background: 'white', borderRadius: '10px', padding: '16px', textAlign: 'center',
+              boxShadow: '0 1px 6px rgba(0,0,0,0.05)', border: '1px solid #E2E8F0',
+              transition: '0.2s', display: 'block'
+            }}>
+              <div style={{ fontSize: '1.5rem', marginBottom: '6px' }}>{a.icon}</div>
+              <div style={{ fontSize: '0.85rem', color: '#475569', fontWeight: 500 }}>{a.label}</div>
             </Link>
-            <span style={{ background: '#FF6B00', color: 'white', padding: '4px 10px', borderRadius: '4px', fontSize: '0.7rem', fontWeight: 600 }}>ADMIN</span>
-          </div>
-          <div style={{ display: 'flex', gap: '15px' }}>
-            <Link href="/" style={{ color: 'white', fontSize: '0.9rem', textDecoration: 'none' }}>View Site</Link>
-            <Link href="/login" style={{ color: 'white', fontSize: '0.9rem', textDecoration: 'none' }}>Logout</Link>
-          </div>
+          ))}
         </div>
-      </header>
+      </div>
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '30px 20px' }}>
-        <h1 style={{ fontSize: '2rem', marginBottom: '30px', color: '#1A1A1A' }}>Admin Dashboard</h1>
-
-        {/* Stats */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '40px' }}>
-          <div style={{ background: 'white', padding: '25px', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-            <p style={{ color: '#888', fontSize: '0.9rem', marginBottom: '5px' }}>Total Articles</p>
-            <p style={{ fontSize: '2.5rem', fontWeight: 700, color: '#FF6B00', margin: 0 }}>156</p>
-            <p style={{ color: '#2E7D32', fontSize: '0.85rem', marginTop: '10px' }}>↑ 12 this month</p>
-          </div>
-          <div style={{ background: 'white', padding: '25px', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-            <p style={{ color: '#888', fontSize: '0.9rem', marginBottom: '5px' }}>Total Users</p>
-            <p style={{ fontSize: '2.5rem', fontWeight: 700, color: '#8B1538', margin: 0 }}>1,234</p>
-            <p style={{ color: '#2E7D32', fontSize: '0.85rem', marginTop: '10px' }}>↑ 89 this month</p>
-          </div>
-          <div style={{ background: 'white', padding: '25px', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-            <p style={{ color: '#888', fontSize: '0.9rem', marginBottom: '5px' }}>Subscribers</p>
-            <p style={{ fontSize: '2.5rem', fontWeight: 700, color: '#1B4332', margin: 0 }}>328</p>
-            <p style={{ color: '#2E7D32', fontSize: '0.85rem', marginTop: '10px' }}>↑ 45 this month</p>
-          </div>
-          <div style={{ background: 'white', padding: '25px', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-            <p style={{ color: '#888', fontSize: '0.9rem', marginBottom: '5px' }}>Revenue</p>
-            <p style={{ fontSize: '2.5rem', fontWeight: 700, color: '#D4AF37', margin: 0 }}>RM 4.2K</p>
-            <p style={{ color: '#2E7D32', fontSize: '0.85rem', marginTop: '10px' }}>↑ 18% vs last</p>
-          </div>
+      {/* Recent Activity */}
+      <div style={{ background: 'white', borderRadius: '12px', boxShadow: '0 1px 8px rgba(0,0,0,0.06)', border: '1px solid #E2E8F0', overflow: 'hidden' }}>
+        <div style={{ padding: '18px 20px', borderBottom: '1px solid #E2E8F0' }}>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#1A1A1A' }}>Recent Activity</h2>
         </div>
-
-        {/* Quick Actions */}
-        <h2 style={{ fontSize: '1.5rem', marginBottom: '20px', color: '#1A1A1A' }}>Manage Content</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '15px', marginBottom: '40px' }}>
-          <Link href="/admin/articles" style={{ textDecoration: 'none' }}>
-            <div style={{ background: 'linear-gradient(135deg, #FF6B00, #8B1538)', padding: '25px 20px', borderRadius: '12px', color: 'white', textAlign: 'center' }}>
-              <p style={{ fontSize: '2rem', margin: '0 0 10px 0' }}>📰</p>
-              <p style={{ fontWeight: 600, margin: 0 }}>Articles</p>
-            </div>
-          </Link>
-          <Link href="/admin/events" style={{ textDecoration: 'none' }}>
-            <div style={{ background: 'linear-gradient(135deg, #1B4332, #0D5C63)', padding: '25px 20px', borderRadius: '12px', color: 'white', textAlign: 'center' }}>
-              <p style={{ fontSize: '2rem', margin: '0 0 10px 0' }}>📅</p>
-              <p style={{ fontWeight: 600, margin: 0 }}>Events</p>
-            </div>
-          </Link>
-          <Link href="/admin/temples" style={{ textDecoration: 'none' }}>
-            <div style={{ background: 'linear-gradient(135deg, #8B1538, #D4AF37)', padding: '25px 20px', borderRadius: '12px', color: 'white', textAlign: 'center' }}>
-              <p style={{ fontSize: '2rem', margin: '0 0 10px 0' }}>🛕</p>
-              <p style={{ fontWeight: 600, margin: 0 }}>Temples</p>
-            </div>
-          </Link>
-          <Link href="/admin/associations" style={{ textDecoration: 'none' }}>
-            <div style={{ background: 'linear-gradient(135deg, #4A6FA5, #1A1A1A)', padding: '25px 20px', borderRadius: '12px', color: 'white', textAlign: 'center' }}>
-              <p style={{ fontSize: '2rem', margin: '0 0 10px 0' }}>🏛️</p>
-              <p style={{ fontWeight: 600, margin: 0 }}>Associations</p>
-            </div>
-          </Link>
-          <Link href="/admin/jobs" style={{ textDecoration: 'none' }}>
-            <div style={{ background: 'linear-gradient(135deg, #0D5C63, #1A1A1A)', padding: '25px 20px', borderRadius: '12px', color: 'white', textAlign: 'center' }}>
-              <p style={{ fontSize: '2rem', margin: '0 0 10px 0' }}>💼</p>
-              <p style={{ fontWeight: 600, margin: 0 }}>Jobs</p>
-            </div>
-          </Link>
-          <Link href="/admin" style={{ textDecoration: 'none' }}>
-            <div style={{ background: 'linear-gradient(135deg, #666, #333)', padding: '25px 20px', borderRadius: '12px', color: 'white', textAlign: 'center' }}>
-              <p style={{ fontSize: '2rem', margin: '0 0 10px 0' }}>👥</p>
-              <p style={{ fontWeight: 600, margin: 0 }}>Users</p>
-            </div>
-          </Link>
-        </div>
-
-        {/* Recent Activity */}
-        <h2 style={{ fontSize: '1.5rem', marginBottom: '20px', color: '#1A1A1A' }}>Recent Activity</h2>
-        <div style={{ background: 'white', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
-          <div style={{ padding: '20px', borderBottom: '1px solid #eee', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span style={{ width: '40px', height: '40px', background: '#FFF5F0', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>📰</span>
-              <div>
-                <p style={{ fontWeight: 600, margin: '0 0 3px 0' }}>New article published</p>
-                <p style={{ color: '#888', fontSize: '0.85rem', margin: 0 }}>Cabinet Approves New Blueprint</p>
-              </div>
-            </div>
-            <span style={{ color: '#888', fontSize: '0.85rem' }}>2 hours ago</span>
-          </div>
-          <div style={{ padding: '20px', borderBottom: '1px solid #eee', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span style={{ width: '40px', height: '40px', background: '#F0FFF5', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>👤</span>
-              <div>
-                <p style={{ fontWeight: 600, margin: '0 0 3px 0' }}>New subscriber</p>
-                <p style={{ color: '#888', fontSize: '0.85rem', margin: 0 }}>john@example.com - Basic Plan</p>
-              </div>
-            </div>
-            <span style={{ color: '#888', fontSize: '0.85rem' }}>3 hours ago</span>
-          </div>
-          <div style={{ padding: '20px', borderBottom: '1px solid #eee', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span style={{ width: '40px', height: '40px', background: '#F0F5FF', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>📅</span>
-              <div>
-                <p style={{ fontWeight: 600, margin: '0 0 3px 0' }}>Event added</p>
-                <p style={{ color: '#888', fontSize: '0.85rem', margin: 0 }}>Thaipusam 2026 at Batu Caves</p>
-              </div>
-            </div>
-            <span style={{ color: '#888', fontSize: '0.85rem' }}>5 hours ago</span>
-          </div>
-          <div style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span style={{ width: '40px', height: '40px', background: '#FFF5FF', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🛕</span>
-              <div>
-                <p style={{ fontWeight: 600, margin: '0 0 3px 0' }}>Temple updated</p>
-                <p style={{ color: '#888', fontSize: '0.85rem', margin: 0 }}>Sri Mahamariamman Temple</p>
-              </div>
-            </div>
-            <span style={{ color: '#888', fontSize: '0.85rem' }}>1 day ago</span>
-          </div>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '500px' }}>
+            <thead>
+              <tr style={{ background: '#F8FAFC' }}>
+                <th style={{ padding: '12px 20px', textAlign: 'left', fontSize: '0.8rem', color: '#94A3B8', fontWeight: 600, textTransform: 'uppercase' }}>Title</th>
+                <th style={{ padding: '12px 20px', textAlign: 'left', fontSize: '0.8rem', color: '#94A3B8', fontWeight: 600, textTransform: 'uppercase' }}>Type</th>
+                <th style={{ padding: '12px 20px', textAlign: 'left', fontSize: '0.8rem', color: '#94A3B8', fontWeight: 600, textTransform: 'uppercase' }}>Date</th>
+                <th style={{ padding: '12px 20px', textAlign: 'left', fontSize: '0.8rem', color: '#94A3B8', fontWeight: 600, textTransform: 'uppercase' }}>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {recentItems.map((item, i) => (
+                <tr key={i} style={{ borderBottom: '1px solid #F1F5F9' }}>
+                  <td style={{ padding: '14px 20px', fontSize: '0.9rem', color: '#1A1A1A', fontWeight: 500 }}>{item.title}</td>
+                  <td style={{ padding: '14px 20px' }}>
+                    <span style={{ background: '#F1F5F9', padding: '3px 10px', borderRadius: '6px', fontSize: '0.8rem', color: '#475569' }}>{item.type}</span>
+                  </td>
+                  <td style={{ padding: '14px 20px', fontSize: '0.85rem', color: '#94A3B8' }}>{item.date}</td>
+                  <td style={{ padding: '14px 20px' }}>
+                    <span style={{
+                      padding: '3px 10px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 600,
+                      background: item.status === 'Published' ? '#E8F5E9' : item.status === 'Active' ? '#E3F2FD' : item.status === 'Verified' ? '#F3E5F5' : '#FFF8E1',
+                      color: item.status === 'Published' ? '#2E7D32' : item.status === 'Active' ? '#1565C0' : item.status === 'Verified' ? '#6A1B9A' : '#F57F17'
+                    }}>{item.status}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
